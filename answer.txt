@@ -1,0 +1,39 @@
+- When the user clicks "Cancel", JOptionPane.showConfirmDialog() returns 2
+(JOptionPane.CANCEL_OPTION).
+
+In the current code, the condition only checks YES_OPTION, so Cancel is
+treated the same as "No" -> displays "You've chosen: No". This is incorrect.
+
+Fix:
+if (option == JOptionPane.YES_OPTION) {
+    JOptionPane.showMessageDialog(null, "You've chosen: Yes");
+} else if (option == JOptionPane.NO_OPTION) {
+    JOptionPane.showMessageDialog(null, "You've chosen: No");
+} else {
+    JOptionPane.showMessageDialog(null, "You cancelled the dialog!");
+}
+
+- To customize options (e.g. "Yes"/"No" only, or "I do"/"I don't"),
+use showOptionDialog() with a custom String array:
+
+String[] options = {"I do", "I don't"};
+
+int option = JOptionPane.showOptionDialog(
+    null,
+    "Do you want to change to the first class ticket?",
+    "Confirm",
+    JOptionPane.YES_NO_OPTION,
+    JOptionPane.QUESTION_MESSAGE,
+    null,
+    options,
+    options[0]
+);
+
+if (option == 0) {
+    JOptionPane.showMessageDialog(null, "You chose: I do");
+} else {
+    JOptionPane.showMessageDialog(null, "You chose: I don't");
+}
+
+Note: showOptionDialog() returns the index (0, 1, 2...) of the button
+clicked, not YES_OPTION/NO_OPTION constants.
