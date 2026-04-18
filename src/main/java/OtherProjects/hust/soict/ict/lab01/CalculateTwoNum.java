@@ -21,6 +21,14 @@ public class CalculateTwoNum {
             div = num1 / num2;
             message = message + "Division: " + div + "\n";
             JOptionPane.showMessageDialog(null, message);
+        String message = "Sum: "+sum+"\nDiff: "+diff+"\nProduct: "+product+"\n";
+        if(num2 == 0){
+            message = message + "Quotient Invalid";
+            JOptionPane.showMessageDialog(null, message);
+        }else{
+          div = num1 / num2;
+          message = message + "Division: "+div+"\n";
+          JOptionPane.showMessageDialog(null, message);
         }
     }
 

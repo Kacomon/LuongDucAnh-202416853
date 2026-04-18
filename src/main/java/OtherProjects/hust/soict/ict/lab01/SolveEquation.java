@@ -8,6 +8,11 @@ public class SolveEquation {
         return Double.parseDouble(sn);
     }
 
+public class SolveEquation{
+    private static double getDouble(String message){
+        String sn = JOptionPane.showInputDialog(message);
+        return Double.parseDouble(sn);
+    }
     private static void solveLinearSystemEquation() {
         double a11, a12, a21, a22, b1, b2;
         a11 = getDouble("Enter a11: ");
@@ -39,6 +44,16 @@ public class SolveEquation {
         double b = getDouble("Enter b: ");
         String ans = a == 0 ? "No solution" : "" + -b / a;
         JOptionPane.showMessageDialog(null, ans);
+        }else{
+            JOptionPane.showMessageDialog(null, "x1: " + D1/D + "\nx2: "+D2/D);
+        }
+
+    }
+    private static void solveLinearEquation(){
+        double a = getDouble("Enter a: ");
+        double b = getDouble("Enter b: ");
+        String ans = a==0 ? "No solution" :"" + -b/a;
+        JOptionPane.showMessageDialog(null,ans);
     }
 
     private static void solveQuadraticEquation() {
@@ -69,6 +84,13 @@ public class SolveEquation {
         } else if (inp.equals("2")) {
             solveLinearSystemEquation();
         } else if (inp.equals("3")) {
+    public static void main(String[] args){
+        String inp = JOptionPane.showInputDialog("Choose type of equation:\n1:  linear equation\n2:  linear system\n3: quadratic equation\n");
+        if(inp.equals("1")){
+            solveLinearEquation();
+        }else if(inp.equals("2")){
+            solveLinearSystemEquation();
+        }else if(inp.equals("3")){
             solveQuadraticEquation();
         }
     }

@@ -12,6 +12,11 @@ public class StoreTest {
         DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladdin", "Animation", 18.99);
 
         DigitalVideoDisc dvd4 = new DigitalVideoDisc("Frozen", "Animation", 20.00);
+        DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.95f);
+        DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars", "Science Fiction", "George Lucas", 87, 24.95f);
+        DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladdin", "Animation", 18.99f);
+
+        DigitalVideoDisc dvd4 = new DigitalVideoDisc("Frozen", "Animation", 20.00f);
 
         System.out.println("--- Testing Add ---");
         store.addDVD(dvd1);

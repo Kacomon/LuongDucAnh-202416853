@@ -54,6 +54,12 @@ public class DigitalVideoDisc {
 
 
 
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
+    public String getCategory() { return category; }
+    public String getDirector() { return director; }
+    public int getLength() { return length; }
+    public double getCost() { return cost; }
 
 
     public DigitalVideoDisc(String title) {
@@ -63,6 +69,7 @@ public class DigitalVideoDisc {
     }
 
     public DigitalVideoDisc(String title, String category, double cost) {
+    public DigitalVideoDisc(String category, String title, double cost) {
         this.category = category;
         this.title = title;
         this.cost = cost;
@@ -71,6 +78,7 @@ public class DigitalVideoDisc {
     }
 
     public DigitalVideoDisc(String title, String category, String director, double cost) {
+    public DigitalVideoDisc(String director, String category, String title, double cost) {
         this.director = director;
         this.category = category;
         this.title = title;

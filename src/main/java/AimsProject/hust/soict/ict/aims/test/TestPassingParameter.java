@@ -21,6 +21,8 @@ public class TestPassingParameter {
         System.out.println("jungle dvd title: " + jungleDVD.getTitle());
 
 
+        changeTitle(jungleDVD, cinderellaDVD.getTitle());
+        System.out.println("jungle dvd title: " + jungleDVD.getTitle());
     }
 
     public static void swap(Object o1, Object o2) {
