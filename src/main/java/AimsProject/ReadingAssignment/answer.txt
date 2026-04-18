@@ -1,0 +1,6 @@
+1. To sell products (DVD)
+2. They are selling DVDs
+3. Store manager, Customer, Card Association System
+4. Browse DVDs, Add Product to Cart, Order, Payment
+5. Add Product, Manage Products, Manage Orders
+6. DigitalVideoDisc, Cart
