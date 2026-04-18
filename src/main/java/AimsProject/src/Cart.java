@@ -57,5 +57,6 @@ public class Cart {
         }
         return total;
     }
+}
 
 }
