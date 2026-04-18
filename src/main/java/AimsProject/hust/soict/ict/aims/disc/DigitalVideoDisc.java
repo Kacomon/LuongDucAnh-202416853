@@ -16,6 +16,44 @@ public class DigitalVideoDisc {
         return id;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public  void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public  void setDirector(String director) {
+        this.director = director;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public void  setLength(int length) {
+        this.length = length;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+
+
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }
     public String getCategory() { return category; }
@@ -30,6 +68,7 @@ public class DigitalVideoDisc {
         this.id = nbDigitalVideoDiscs;
     }
 
+    public DigitalVideoDisc(String title, String category, double cost) {
     public DigitalVideoDisc(String category, String title, double cost) {
         this.category = category;
         this.title = title;
@@ -38,6 +77,7 @@ public class DigitalVideoDisc {
         this.id = nbDigitalVideoDiscs;
     }
 
+    public DigitalVideoDisc(String title, String category, String director, double cost) {
     public DigitalVideoDisc(String director, String category, String title, double cost) {
         this.director = director;
         this.category = category;

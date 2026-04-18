@@ -2,6 +2,12 @@ package OtherProjects.hust.soict.ict.lab01;
 
 import javax.swing.JOptionPane;
 
+public class SolveEquation {
+    private static double getDouble(String message) {
+        String sn = JOptionPane.showInputDialog(message);
+        return Double.parseDouble(sn);
+    }
+
 public class SolveEquation{
     private static double getDouble(String message){
         String sn = JOptionPane.showInputDialog(message);
@@ -27,6 +33,17 @@ public class SolveEquation{
                 JOptionPane.showMessageDialog(null, "No solution");
             }
 
+        } else {
+            JOptionPane.showMessageDialog(null, "x1: " + D1 / D + "\nx2: " + D2 / D);
+        }
+
+    }
+
+    private static void solveLinearEquation() {
+        double a = getDouble("Enter a: ");
+        double b = getDouble("Enter b: ");
+        String ans = a == 0 ? "No solution" : "" + -b / a;
+        JOptionPane.showMessageDialog(null, ans);
         }else{
             JOptionPane.showMessageDialog(null, "x1: " + D1/D + "\nx2: "+D2/D);
         }
@@ -60,6 +77,13 @@ public class SolveEquation{
         }
     }
 
+    public static void main(String[] args) {
+        String inp = JOptionPane.showInputDialog("Choose type of equation:\n1:  linear equation\n2:  linear system\n3: quadratic equation\n");
+        if (inp.equals("1")) {
+            solveLinearEquation();
+        } else if (inp.equals("2")) {
+            solveLinearSystemEquation();
+        } else if (inp.equals("3")) {
     public static void main(String[] args){
         String inp = JOptionPane.showInputDialog("Choose type of equation:\n1:  linear equation\n2:  linear system\n3: quadratic equation\n");
         if(inp.equals("1")){

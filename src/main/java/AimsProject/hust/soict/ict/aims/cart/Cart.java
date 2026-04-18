@@ -7,6 +7,11 @@ public class Cart {
     private DigitalVideoDisc itemsOrdered[] = new DigitalVideoDisc[MAX_NUMBERS_ORDERED];
     private int qtyOrdered = 0;
 
+    public Cart(DigitalVideoDisc... items) {
+        if (items.length > MAX_NUMBERS_ORDERED) {
+            throw new IllegalArgumentException("Maximum number of items is " + MAX_NUMBERS_ORDERED);
+        }
+        for (DigitalVideoDisc item : items) {
     public Cart(DigitalVideoDisc... items){
         if(items.length > MAX_NUMBERS_ORDERED){
             throw new IllegalArgumentException("Maximum number of items is " + MAX_NUMBERS_ORDERED);
@@ -54,6 +59,8 @@ public class Cart {
         }
     }
 
+    public void addDigitalVideoDisc(DigitalVideoDisc item) {
+        if (qtyOrdered >= MAX_NUMBERS_ORDERED) {
     public void addDigitalVideoDisc(DigitalVideoDisc item){
         if(qtyOrdered >= MAX_NUMBERS_ORDERED){
             System.err.println("Cart is full!");
@@ -63,6 +70,9 @@ public class Cart {
         qtyOrdered++;
         System.out.println("The disc has been added to the cart!");
 
+        if (qtyOrdered == MAX_NUMBERS_ORDERED) {
+            System.out.println("Cart is full!");
+        } else if (qtyOrdered == MAX_NUMBERS_ORDERED - 1) {
         if(qtyOrdered == MAX_NUMBERS_ORDERED){
             System.out.println("Cart is full!");
         }else if(qtyOrdered == MAX_NUMBERS_ORDERED - 1){
@@ -79,12 +89,20 @@ public class Cart {
             addDigitalVideoDisc(disc);
         }
     }
+
     
     public void addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
         addDigitalVideoDisc(dvd1);
         addDigitalVideoDisc(dvd2);
     }
 
+    public void removeDigitalVideoDisc(DigitalVideoDisc disc) {
+        boolean found = false;
+        for (int i = 0; i < itemsOrdered.length; i++) {
+            if (itemsOrdered[i] != null && itemsOrdered[i].equals(disc)) {
+                found = true;
+                for (int j = i; j < qtyOrdered - 1; j++) {
+                    itemsOrdered[j] = itemsOrdered[j + 1];
     public void removeDigitalVideoDisc(DigitalVideoDisc disc){
         boolean found = false;
         for(int i =0; i< itemsOrdered.length; i++){
@@ -99,11 +117,15 @@ public class Cart {
                 break;
             }
         }
+        if (!found) {
         if(!found){
             System.out.println("The disc not found!");
         }
     }
 
+    public double totalCost() {
+        double total = 0;
+        for (int i = 0; i < qtyOrdered; i++) {
     public double totalCost(){
         double total = 0;
         for(int i = 0; i < qtyOrdered; i++){

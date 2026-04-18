@@ -1,4 +1,9 @@
 package OtherProjects.hust.soict.ict.lab01;
+
+import javax.swing.JOptionPane;
+
+public class ChoosingOption {
+    public static void main(String[] args) {
 import javax.swing.JOptionPane;
 
 public class ChoosingOption {
@@ -15,6 +20,11 @@ public class ChoosingOption {
                 options[0]
         );
 
+        if (userChoice == 0) {
+            JOptionPane.showMessageDialog(null, "You choose Yes");
+        } else if (userChoice == 1) {
+            JOptionPane.showMessageDialog(null, "You choose No");
+        } else {
         if(userChoice==0){
             JOptionPane.showMessageDialog(null, "You choose Yes");
         }else if(userChoice==1){
