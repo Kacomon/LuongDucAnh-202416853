@@ -1,4 +1,4 @@
-package Lab02.AimsProject.src;
+package AimsProject.src;
 
 public class Cart {
     public static final int MAX_NUMBERS_ORDERED = 20;
@@ -31,10 +31,26 @@ public class Cart {
         }
     }
 
+    public void addDigitalVideoDisc(DigitalVideoDisc... dvdList) {
+        for (DigitalVideoDisc disc : dvdList) {
+            if (qtyOrdered == MAX_NUMBERS_ORDERED) {
+                System.out.println("The cart is full! Cannot add more discs from the list.");
+                break;
+            }
+            addDigitalVideoDisc(disc);
+        }
+    }
+    
+    public void addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
+        addDigitalVideoDisc(dvd1);
+        addDigitalVideoDisc(dvd2);
+    }
+
     public void removeDigitalVideoDisc(DigitalVideoDisc disc){
         boolean found = false;
         for(int i =0; i< itemsOrdered.length; i++){
-            if(itemsOrdered[i].equals(disc)){
+            if(itemsOrdered[i] != null && itemsOrdered[i].equals(disc)){
+                found = true;
                 for(int j = i; j < qtyOrdered - 1; j++){
                     itemsOrdered[j] = itemsOrdered[j+1];
                 }
@@ -56,5 +72,4 @@ public class Cart {
         }
         return total;
     }
-
 }
