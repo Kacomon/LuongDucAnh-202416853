@@ -1,0 +1,7 @@
+Java is strictly a Pass by Value programming language. Depending on what you are passing:
+
+1. Passing Primitive Types (int, double, boolean, etc.)
+When you pass a primitive data type to a method, Java makes a literal copy of that value. Any changes made to the copy inside the method will not affect the original variable outside the method.
+
+2. Passing Objects (like DigitalVideoDisc)
+When you pass an object to a method, Java does not pass the actual object itself, nor does it pass by reference. Instead, it passes a copy of the reference (the memory address) pointing to that object.

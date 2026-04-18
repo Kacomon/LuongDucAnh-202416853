@@ -1,4 +1,5 @@
-package Lab01;
+package OtherProjects.hust.soict.ict.lab01;
+
 import javax.swing.JOptionPane;
 
 public class CalculateTwoNum {
@@ -12,14 +13,14 @@ public class CalculateTwoNum {
         double diff = num1 - num2;
         double product = num1 * num2;
         double div = 0;
-        String message = "Sum: "+sum+"\nDiff: "+diff+"\nProduct: "+product+"\n";
-        if(num2 == 0){
+        String message = "Sum: " + sum + "\nDiff: " + diff + "\nProduct: " + product + "\n";
+        if (num2 == 0) {
             message = message + "Quotient Invalid";
             JOptionPane.showMessageDialog(null, message);
-        }else{
-          div = num1 / num2;
-          message = message + "Division: "+div+"\n";
-          JOptionPane.showMessageDialog(null, message);
+        } else {
+            div = num1 / num2;
+            message = message + "Division: " + div + "\n";
+            JOptionPane.showMessageDialog(null, message);
         }
     }
 
