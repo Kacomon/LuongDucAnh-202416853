@@ -62,6 +62,22 @@ public class DigitalVideoDisc {
         this.cost = cost;
         nbDigitalVideoDiscs++;
         this.id = nbDigitalVideoDiscs;
+
+    public DigitalVideoDisc(String title) {
+        this.title = title;
+    }
+
+    public DigitalVideoDisc(String title, String category, double cost) {
+        this.title = title;
+        this.category = category;
+        this.cost = cost;
+    }
+
+    public DigitalVideoDisc(String title, String category, String director, double cost) {
+        this.title = title;
+        this.category = category;
+        this.director = director;
+        this.cost = cost;
     }
 
     public DigitalVideoDisc(String title, String category, String director, int length, double cost) {
@@ -84,5 +100,22 @@ public class DigitalVideoDisc {
             return false;
         }
         return this.title.toLowerCase().contains(title.toLowerCase());
+    }
+}
+    }
+    public String getTitle(){
+        return title;
+    }
+    public String getCategory(){
+        return category;
+    }
+    public String getDirector(){
+        return director;
+    }
+    public int getLength(){
+        return length;
+    }
+    public double getCost(){
+        return cost;
     }
 }
