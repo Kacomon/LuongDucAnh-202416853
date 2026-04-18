@@ -13,6 +13,11 @@ public class Aims {
         DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladdin", "Animation", 18.99);
         anOrder.addDigitalVideoDisc(dvd3);
 
+        System.out.println("\n Testing Assigned IDs");
+        System.out.println(dvd1.getTitle() + " ID: " + dvd1.getId());
+        System.out.println(dvd2.getTitle() + " ID: " + dvd2.getId());
+        System.out.println(dvd3.getTitle() + " ID: " + dvd3.getId());
+
         System.out.println("Total Cost is: ");
         System.out.println(anOrder.totalCost());
 
@@ -20,4 +25,5 @@ public class Aims {
         System.out.println("Total Cost after removing Star Wars is: ");
         System.out.println(anOrder.totalCost());
     }
+}
 }

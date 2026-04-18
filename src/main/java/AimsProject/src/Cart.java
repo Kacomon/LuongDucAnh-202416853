@@ -15,6 +15,43 @@ public class Cart {
         }
     }
 
+    public void print() {
+        System.out.println("***********************CART***********************");
+        System.out.println("Ordered Items:");
+        for (int i = 0; i < qtyOrdered; i++) {
+            System.out.println((i + 1) + ". " + itemsOrdered[i].toString());
+        }
+        System.out.println("Total cost: " + totalCost() + " $");
+        System.out.println("***************************************************");
+    }
+
+    public void searchById(int id) {
+        boolean found = false;
+        for (int i = 0; i < qtyOrdered; i++) {
+            if (itemsOrdered[i].getId() == id) {
+                System.out.println("Match found by ID: " + itemsOrdered[i].toString());
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            System.out.println("No match found for ID: " + id);
+        }
+    }
+
+    public void searchByTitle(String title) {
+        boolean found = false;
+        for (int i = 0; i < qtyOrdered; i++) {
+            if (itemsOrdered[i].isMatch(title)) {
+                System.out.println("Match found by Title: " + itemsOrdered[i].toString());
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No match found for Title: " + title);
+        }
+    }
+
     public void addDigitalVideoDisc(DigitalVideoDisc item){
         if(qtyOrdered >= MAX_NUMBERS_ORDERED){
             System.err.println("Cart is full!");
