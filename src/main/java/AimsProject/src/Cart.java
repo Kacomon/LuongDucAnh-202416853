@@ -1,4 +1,4 @@
-package Lab02.AimsProject.src;
+package AimsProject.src;
 
 public class Cart {
     public static final int MAX_NUMBERS_ORDERED = 20;
@@ -35,6 +35,7 @@ public class Cart {
         boolean found = false;
         for(int i =0; i< itemsOrdered.length; i++){
             if(itemsOrdered[i].equals(disc)){
+                found = true;
                 for(int j = i; j < qtyOrdered - 1; j++){
                     itemsOrdered[j] = itemsOrdered[j+1];
                 }
