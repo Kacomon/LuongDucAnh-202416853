@@ -284,8 +284,121 @@ public class Aims {
     }
 
     public static void updateStore() {
-        System.out.println("Update store is not implemented in this sample application.");
-        System.out.println("Use View store or AIMS source code to modify store contents.");
+        boolean back = false;
+        while (!back) {
+            System.out.println("Update store:");
+            System.out.println("--------------------------------");
+            System.out.println("1. Add a media");
+            System.out.println("2. Remove a media");
+            System.out.println("0. Back");
+            System.out.println("--------------------------------");
+            System.out.println("Please choose a number: 0-1-2");
+            int choice = getIntInput();
+            switch (choice) {
+                case 1:
+                    addMediaToStore();
+                    break;
+                case 2:
+                    removeMediaFromStore();
+                    break;
+                case 0:
+                    back = true;
+                    break;
+                default:
+                    System.out.println("Please enter a valid option.");
+            }
+        }
+    }
+
+    public static void addMediaToStore() {
+        System.out.println("Add new media to store:");
+        System.out.println("Select media type:");
+        System.out.println("1. Digital Video Disc (DVD)");
+        System.out.println("2. Compact Disc (CD)");
+        System.out.println("3. Book");
+        int type = getIntInput();
+        
+        switch (type) {
+            case 1:
+                addDVDToStore();
+                break;
+            case 2:
+                addCDToStore();
+                break;
+            case 3:
+                addBookToStore();
+                break;
+            default:
+                System.out.println("Invalid media type.");
+        }
+    }
+
+    public static void addDVDToStore() {
+        System.out.print("Enter DVD id: ");
+        int id = getIntInput();
+        System.out.print("Enter DVD title: ");
+        String title = scanner.nextLine().trim();
+        System.out.print("Enter DVD category: ");
+        String category = scanner.nextLine().trim();
+        System.out.print("Enter DVD director: ");
+        String director = scanner.nextLine().trim();
+        System.out.print("Enter DVD length (minutes): ");
+        int length = getIntInput();
+        System.out.print("Enter DVD cost: ");
+        float cost = getFloatInput();
+        
+        DigitalVideoDisc dvd = new DigitalVideoDisc(id, title, category, director, length, cost);
+        store.addMedia(dvd);
+    }
+
+    public static void addCDToStore() {
+        System.out.print("Enter CD id: ");
+        int id = getIntInput();
+        System.out.print("Enter CD title: ");
+        String title = scanner.nextLine().trim();
+        System.out.print("Enter CD category: ");
+        String category = scanner.nextLine().trim();
+        System.out.print("Enter CD director/Producer: ");
+        String director = scanner.nextLine().trim();
+        System.out.print("Enter CD cost: ");
+        float cost = getFloatInput();
+        System.out.print("Enter CD artist: ");
+        String artist = scanner.nextLine().trim();
+        
+        CompactDisc cd = new CompactDisc(id, title, category, director, cost, artist);
+        store.addMedia(cd);
+    }
+
+    public static void addBookToStore() {
+        System.out.print("Enter Book id: ");
+        int id = getIntInput();
+        System.out.print("Enter Book title: ");
+        String title = scanner.nextLine().trim();
+        System.out.print("Enter Book category: ");
+        String category = scanner.nextLine().trim();
+        System.out.print("Enter Book cost: ");
+        float cost = getFloatInput();
+        
+        Book book = new Book(id, title, category, cost);
+        System.out.print("Enter number of authors: ");
+        int numAuthors = getIntInput();
+        for (int i = 0; i < numAuthors; i++) {
+            System.out.print("Enter author " + (i + 1) + ": ");
+            String author = scanner.nextLine().trim();
+            book.addAuthor(author);
+        }
+        store.addMedia(book);
+    }
+
+    public static void removeMediaFromStore() {
+        System.out.print("Enter media title to remove: ");
+        String title = scanner.nextLine().trim();
+        Media media = store.searchByTitle(title);
+        if (media == null) {
+            System.out.println("Media not found in store: " + title);
+            return;
+        }
+        store.removeMedia(media);
     }
 
     private static int getIntInput() {
@@ -293,6 +406,17 @@ public class Aims {
         try {
             String line = scanner.nextLine().trim();
             value = Integer.parseInt(line);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid number input.");
+        }
+        return value;
+    }
+
+    private static float getFloatInput() {
+        float value = -1;
+        try {
+            String line = scanner.nextLine().trim();
+            value = Float.parseFloat(line);
         } catch (NumberFormatException e) {
             System.out.println("Invalid number input.");
         }
