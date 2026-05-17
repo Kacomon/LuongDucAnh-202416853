@@ -1,0 +1,38 @@
+Lab 04 answers
+
+1. Which class should implement the Comparable interface?
+- The Media class should implement Comparable<Media> because it is the common base class for all media items in the cart.
+- If the natural ordering is intended for all media objects, Media is the best place for compareTo().
+
+2. How should compareTo() be implemented to reflect the ordering that we want?
+- For ordering by title then cost: compare titles first (case-insensitive), and if titles are equal, compare cost in descending order.
+- Example: compare title strings; if equal, return Float.compare(other.cost, this.cost) or compare cost reversed.
+
+3. Can we have two ordering rules of the item (by title then cost and by cost then title) if we use this Comparable interface approach?
+- No. The Comparable interface defines a single natural ordering per class, so it can only support one compareTo() implementation.
+- To support multiple orderings, use Comparator objects instead.
+
+4. Suppose the DVDs have a different ordering rule from the other media types, that is by title, then decreasing length, then cost. How would you modify your code to allow this?
+- Use a separate Comparator<DigitalVideoDisc> for the DVD ordering rule.
+- Keep Media.compareTo() or Media comparators for general media sorting, and use a DVD-specific comparator when sorting DVD collections.
+- Alternatively, override compareTo() in DigitalVideoDisc if DigitalVideoDisc needs its own natural order, but use Comparator for alternate orders.
+
+5. Which classes are aggregates of other classes?
+- Cart aggregates Media objects.
+- Store aggregates Media objects.
+- CompactDisc aggregates Track objects.
+- Book aggregates a list of author names.
+- Media and Disc are not aggregates; they represent common properties inherited by subclasses.
+
+6. Notes about equals() and unique lists
+- For Media, equals() should compare titles (case-insensitive) so that two media objects with the same title are treated as equal for list contains()/remove() checks.
+- For Track, equals() should compare both title and length so duplicate tracks are not added to the same CD.
+
+7. Polymorphism with toString()
+- When a list of Media contains different concrete subclasses (Book, DigitalVideoDisc, CompactDisc), calling toString() on each element invokes the overridden method on the actual object type.
+- This demonstrates polymorphism because the behavior depends on the runtime class of each object.
+
+8. Summary of ordering approach
+- Use Comparator objects for multiple sorting strategies.
+- Media.COMPARE_BY_TITLE_COST and Media.COMPARE_BY_COST_TITLE are the correct way to support both title-first and cost-first orderings.
+- A single Comparable implementation cannot cover both orderings.
