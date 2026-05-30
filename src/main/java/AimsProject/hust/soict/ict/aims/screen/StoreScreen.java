@@ -1,5 +1,7 @@
 package AimsProject.hust.soict.ict.aims.screen;
 
+import AimsProject.hust.soict.ict.aims.cart.Cart;
+import AimsProject.hust.soict.ict.aims.media.*;
 import AimsProject.hust.soict.ict.aims.store.Store;
 
 import java.awt.*;
@@ -9,11 +11,12 @@ import java.util.ArrayList;
 
 public class StoreScreen extends JFrame {
     private Store store;
+    private Cart cart;
     JPanel createNorth(){
         JPanel north = new JPanel();
         north.setLayout(new BoxLayout(north, BoxLayout.Y_AXIS));
         north.add(createMenuBar());
-        //north.add(createHeader());
+        north.add(createHeader());
         return north;
     };
 
@@ -31,7 +34,7 @@ public class StoreScreen extends JFrame {
         menu.add(new JMenuItem("View Cart"));
 
         JMenuBar menuBar = new JMenuBar();
-        menu.setLayout(new FlowLayout(FlowLayout.LEFT));
+        menuBar.setLayout(new FlowLayout(FlowLayout.LEFT));
         menuBar.add(menu);
 
         return menuBar;
@@ -59,11 +62,25 @@ public class StoreScreen extends JFrame {
         return header;
     }
 
-    public StoreScreen(Store store) {
+    JPanel createCenter(){
+        JPanel center = new JPanel();
+        center.setLayout(new GridLayout(3,3,2,2));
+
+        ArrayList<Media> mediaInStore = store.getItemsInStore();
+        for(Media media : mediaInStore){
+            MediaStore cell = new MediaStore(media);
+            center.add(cell);
+        }
+        return center;
+    }
+
+    public StoreScreen(Store store, Cart cart) {
         this.store = store;
+        this.cart = cart;
         Container cp = getContentPane();
         cp.setLayout(new BorderLayout());
         cp.add(createNorth(), BorderLayout.NORTH);
+        cp.add(createCenter(), BorderLayout.CENTER);
         setTitle("Store");
         setSize(1024,768);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,8 +90,8 @@ public class StoreScreen extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             Store store = new Store();
-            //Cart cart = new Cart();
-            new StoreScreen(store);
+            Cart cart = new Cart();
+            new StoreScreen(store,cart);
         });
     }
 
