@@ -1,4 +1,5 @@
 package AimsProject.hust.soict.ict.aims.cart;
+
 import AimsProject.hust.soict.ict.aims.media.Media;
 
 import java.util.ArrayList;
@@ -30,9 +31,7 @@ public class Cart {
 
     public float totalCost() {
         float total = 0;
-        for (Media m : itemsOrdered) {
-            total += m.getCost();
-        }
+        for (Media m : itemsOrdered) total += m.getCost();
         return total;
     }
 
@@ -40,7 +39,7 @@ public class Cart {
         System.out.println("CART");
         System.out.println("Ordered Items:");
         for (int i = 0; i < itemsOrdered.size(); i++) {
-            System.out.println((i+1) + ". " + itemsOrdered.get(i).toString());
+            System.out.println((i + 1) + ". " + itemsOrdered.get(i).toString());
         }
         System.out.println("Total cost: " + totalCost());
         System.out.println("--------------------------------");
@@ -78,18 +77,16 @@ public class Cart {
 
     public Media searchMedia(String title) {
         for (Media m : itemsOrdered) {
-            if (m.getTitle().equalsIgnoreCase(title)) {
-                return m;
-            }
+            if (m.getTitle().equalsIgnoreCase(title)) return m;
         }
         return null;
     }
 
-    public int getSize() {
-        return itemsOrdered.size();
-    }
+    public int getSize() { return itemsOrdered.size(); }
 
-    public void empty() {
-        itemsOrdered.clear();
+    public void empty() { itemsOrdered.clear(); }
+
+    public ArrayList<Media> getItemsOrdered() {
+        return new ArrayList<>(itemsOrdered);
     }
 }

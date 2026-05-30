@@ -2,7 +2,7 @@ package AimsProject.hust.soict.ict.aims.media;
 import java.util.Comparator;
 
 public abstract class Media {
-    private static int nbMedia=0;
+    private static int nbMedia = 0;
     private int id;
     private String title;
     private String category;
@@ -16,15 +16,14 @@ public abstract class Media {
 
     public Media() {
         nbMedia++;
-        this.id=nbMedia;
+        this.id = nbMedia;
     }
 
-    public Media(String title){
+    public Media(String title) {
         nbMedia++;
-        this.id=nbMedia;
+        this.id = nbMedia;
         this.title = title;
     }
-
 
     public Media(String title, String category, double cost) {
         nbMedia++;
@@ -34,43 +33,22 @@ public abstract class Media {
         this.cost = cost;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public double getCost() {
-        return cost;
-    }
-
-    public void setCost(float cost) {
-        this.cost = cost;
-    }
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
+    public double getCost() { return cost; }
+    public void setCost(float cost) { this.cost = cost; }
 
     @Override
     public boolean equals(Object o) {
         if (o == this) return true;
         if (!(o instanceof Media)) return false;
-        return ((Media) o).getTitle().equals(this.title);
+        Media other = (Media) o;
+        if (this.title == null || other.getTitle() == null) return false;
+        return this.title.equals(other.getTitle());
     }
 
     @Override
