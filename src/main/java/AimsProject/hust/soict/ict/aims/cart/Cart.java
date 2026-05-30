@@ -5,6 +5,8 @@ import java.util.Collections;
 import AimsProject.hust.soict.ict.aims.media.Media;
 
 public class Cart {
+    public static final int MAX_NUMBERS_ORDERED = 20;
+
     private ArrayList<Media> itemsOrdered = new ArrayList<>();
 
     public ArrayList<Media> getItemsOrdered() {
@@ -14,6 +16,10 @@ public class Cart {
     public void addMedia(Media media) {
         if (media == null) {
             System.out.println("Cannot add null media to the cart.");
+            return;
+        }
+        if (itemsOrdered.size() >= MAX_NUMBERS_ORDERED) {
+            System.out.println("The cart is full! Maximum " + MAX_NUMBERS_ORDERED + " items allowed.");
             return;
         }
         if (itemsOrdered.contains(media)) {
@@ -51,17 +57,13 @@ public class Cart {
 
     public Media searchById(int id) {
         for (Media media : itemsOrdered) {
-            if (media.getId() == id) {
-                return media;
-            }
+            if (media.getId() == id) return media;
         }
         return null;
     }
 
     public Media searchByTitle(String title) {
-        if (title == null) {
-            return null;
-        }
+        if (title == null) return null;
         for (Media media : itemsOrdered) {
             if (media.getTitle() != null && media.getTitle().equalsIgnoreCase(title)) {
                 return media;
@@ -72,9 +74,7 @@ public class Cart {
 
     public double totalCost() {
         double total = 0;
-        for (Media media : itemsOrdered) {
-            total += media.getCost();
-        }
+        for (Media media : itemsOrdered) total += media.getCost();
         return total;
     }
 

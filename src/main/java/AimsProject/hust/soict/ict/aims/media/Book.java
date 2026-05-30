@@ -3,10 +3,25 @@ package AimsProject.hust.soict.ict.aims.media;
 import java.util.ArrayList;
 
 public class Book extends Media {
+    private int contentLength;
     private final ArrayList<String> authors = new ArrayList<>();
 
-    public Book(int id, String title, String category, float cost) {
-        super(id, title, category, cost);
+    public Book(String title, String category, float cost) {
+        super(title, category, cost);
+        this.contentLength = 0;
+    }
+
+    public Book(String title, String category, float cost, int contentLength) {
+        super(title, category, cost);
+        this.contentLength = contentLength;
+    }
+
+    public int getContentLength() {
+        return contentLength;
+    }
+
+    public void setContentLength(int contentLength) {
+        this.contentLength = contentLength;
     }
 
     public ArrayList<String> getAuthors() {
@@ -38,15 +53,9 @@ public class Book extends Media {
         }
     }
 
-    public int getLength() {
-        if (getTitle() == null || getTitle().trim().isEmpty()) {
-            return 0;
-        }
-        return getTitle().trim().split("\\s+").length;
-    }
-
     @Override
     public String toString() {
-        return "Book - [" + getTitle() + "] - [" + getCategory() + "] - authors=" + authors + " - content length=" + getLength() + " - [" + getCost() + "] $";
+        return "Book - [" + getTitle() + "] - [" + getCategory() + "] - authors=" + authors
+                + " - content length=" + contentLength + " - [" + getCost() + "] $";
     }
 }

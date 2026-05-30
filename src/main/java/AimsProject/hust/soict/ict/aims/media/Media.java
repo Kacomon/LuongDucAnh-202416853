@@ -1,27 +1,26 @@
 package AimsProject.hust.soict.ict.aims.media;
 
 import java.util.Comparator;
-import java.util.Objects;
 
 public abstract class Media {
+    private static int nbMedia = 0;
+
     private int id;
     private String title;
     private String category;
     private float cost;
 
-    public static final Comparator<Media> COMPARE_BY_TITLE_COST = Comparator
-            .comparing(Media::getTitle, String.CASE_INSENSITIVE_ORDER)
-            .thenComparing(Comparator.comparing(Media::getCost).reversed());
-
-    public static final Comparator<Media> COMPARE_BY_COST_TITLE = Comparator
-            .comparing(Media::getCost).reversed()
-            .thenComparing(Media::getTitle, String.CASE_INSENSITIVE_ORDER);
+    public static final Comparator<Media> COMPARE_BY_TITLE_COST = new MediaComparatorByTitleCost();
+    public static final Comparator<Media> COMPARE_BY_COST_TITLE = new MediaComparatorByCostTitle();
 
     public Media() {
+        nbMedia++;
+        this.id = nbMedia;
     }
 
-    public Media(int id, String title, String category, float cost) {
-        this.id = id;
+    public Media(String title, String category, float cost) {
+        nbMedia++;
+        this.id = nbMedia;
         this.title = title;
         this.category = category;
         this.cost = cost;
@@ -57,16 +56,10 @@ public abstract class Media {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof Media)) {
-            return false;
-        }
+        if (this == obj) return true;
+        if (!(obj instanceof Media)) return false;
         Media other = (Media) obj;
-        if (title == null) {
-            return other.title == null;
-        }
+        if (title == null) return other.title == null;
         return title.equalsIgnoreCase(other.title);
     }
 

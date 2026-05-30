@@ -10,23 +10,24 @@ public class StoreTest {
     public static void main(String[] args) {
         Store store = new Store();
 
-        DigitalVideoDisc dvd1 = new DigitalVideoDisc(1, "The Lion King", "Animation", "Roger Allers", 87, 19.95f);
-        DigitalVideoDisc dvd2 = new DigitalVideoDisc(2, "Star Wars", "Science Fiction", "George Lucas", 87, 24.95f);
-        Book book1 = new Book(3, "Clean Code", "Software", 29.99f);
-        book1.addAuthor("Robert C. Martin");
-        CompactDisc cd1 = new CompactDisc(4, "Hybrid Theory", "Rock", "Don Gilmore", 15.00f, "Linkin Park");
-        cd1.addTrack(new Track("Papercut", 185));
+        Book book = new Book("The War of Art", "Self-Help", 12.99f, 35000);
+        book.addAuthor("Steven Pressfield");
 
-        System.out.println("--- Testing Add ---");
-        store.addMedia(dvd1);
-        store.addMedia(dvd2);
-        store.addMedia(book1);
-        store.addMedia(cd1);
+        DigitalVideoDisc dvd = new DigitalVideoDisc("Star Wars", "Science Fiction", "George Lucas", 87, 24.95f);
 
-        System.out.println("\n--- Testing Remove (Existing Item) ---");
-        store.removeMedia(dvd2);
+        CompactDisc cd = new CompactDisc("Thriller", "Pop", "Quincy Jones", 18.50f, "Michael Jackson");
+        cd.addTrack(new Track("Thriller", 357));
 
-        System.out.println("\n--- Testing Remove (Non-Existing Item) ---");
-        store.removeMedia(new DigitalVideoDisc(99, "Not In Store", "Unknown", "Unknown", 100, 0.0f));
+        store.addMedia(book);
+        store.addMedia(dvd);
+        store.addMedia(cd);
+        store.print();
+
+        System.out.println("\n-- Search by title: 'Star Wars' --");
+        System.out.println(store.searchByTitle("Star Wars"));
+
+        System.out.println("\n-- Remove book --");
+        store.removeMedia(book);
+        store.print();
     }
 }

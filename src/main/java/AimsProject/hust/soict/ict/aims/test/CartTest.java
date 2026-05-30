@@ -10,31 +10,30 @@ public class CartTest {
     public static void main(String[] args) {
         Cart cart = new Cart();
 
-        DigitalVideoDisc dvd1 = new DigitalVideoDisc(1, "The Lion King", "Animation", "Roger Allers", 87, 19.95f);
-        cart.addMedia(dvd1);
+        Book book = new Book("Clean Code", "Software", 29.99f, 90000);
+        book.addAuthor("Robert C. Martin");
 
-        Book book1 = new Book(2, "Clean Code", "Software", 29.99f);
-        book1.addAuthor("Robert C. Martin");
-        cart.addMedia(book1);
+        DigitalVideoDisc dvd = new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.95f);
 
-        CompactDisc cd1 = new CompactDisc(3, "Hybrid Theory", "Rock", "Don Gilmore", 15.0f, "Linkin Park");
-        cd1.addTrack(new Track("Papercut", 185));
-        cd1.addTrack(new Track("In the End", 216));
-        cart.addMedia(cd1);
+        CompactDisc cd = new CompactDisc("Hybrid Theory", "Rock", "Don Gilmore", 15.00f, "Linkin Park");
+        cd.addTrack(new Track("In the End", 216));
+        cd.addTrack(new Track("Papercut", 185));
 
-        System.out.println("\n--- Testing Print Method ---");
+        cart.addMedia(book);
+        cart.addMedia(dvd);
+        cart.addMedia(cd);
         cart.print();
 
-        System.out.println("\n--- Testing Search By ID ---");
-        System.out.println(cart.searchById(1));
-        System.out.println(cart.searchById(99));
-
-        System.out.println("\n--- Testing Search By Title ---");
-        System.out.println(cart.searchByTitle("Star Wars"));
-        System.out.println(cart.searchByTitle("In the End"));
-
-        System.out.println("\n--- Testing Sort by Title ---");
+        System.out.println("\n-- Sort by title --");
         cart.sortByTitle();
+        cart.print();
+
+        System.out.println("\n-- Sort by cost --");
+        cart.sortByCost();
+        cart.print();
+
+        System.out.println("\n-- Remove DVD --");
+        cart.removeMedia(dvd);
         cart.print();
     }
 }

@@ -23,22 +23,15 @@ public class Aims {
             showMenu();
             int choice = getIntInput();
             switch (choice) {
-                case 1:
-                    showStoreMenu();
-                    break;
-                case 2:
-                    updateStore();
-                    break;
-                case 3:
-                    showCartMenu();
-                    break;
+                case 1: showStoreMenu(); break;
+                case 2: updateStore(); break;
+                case 3: showCartMenu(); break;
                 case 0:
                     System.out.println("Exiting AIMS. Goodbye!");
                     running = false;
                     break;
                 default:
                     System.out.println("Please enter a valid option.");
-                    break;
             }
         }
         scanner.close();
@@ -55,38 +48,54 @@ public class Aims {
         System.out.println("Please choose a number: 0-1-2-3");
     }
 
+    public static void storeMenu() {
+        System.out.println("Options: ");
+        System.out.println("--------------------------------");
+        System.out.println("1. See a media's details");
+        System.out.println("2. Add a media to cart");
+        System.out.println("3. Play a media");
+        System.out.println("4. See current cart");
+        System.out.println("0. Back");
+        System.out.println("--------------------------------");
+        System.out.println("Please choose a number: 0-1-2-3-4");
+    }
+
+    public static void mediaDetailsMenu() {
+        System.out.println("Options: ");
+        System.out.println("--------------------------------");
+        System.out.println("1. Add to cart");
+        System.out.println("2. Play");
+        System.out.println("0. Back");
+        System.out.println("--------------------------------");
+        System.out.println("Please choose a number: 0-1-2");
+    }
+
+    public static void cartMenu() {
+        System.out.println("Options: ");
+        System.out.println("--------------------------------");
+        System.out.println("1. Filter medias in cart");
+        System.out.println("2. Sort medias in cart");
+        System.out.println("3. Remove media from cart");
+        System.out.println("4. Play a media");
+        System.out.println("5. Place order");
+        System.out.println("0. Back");
+        System.out.println("--------------------------------");
+        System.out.println("Please choose a number: 0-1-2-3-4-5");
+    }
+
     public static void showStoreMenu() {
         boolean back = false;
         while (!back) {
             store.print();
-            System.out.println("Options:");
-            System.out.println("--------------------------------");
-            System.out.println("1. See a media's details");
-            System.out.println("2. Add a media to cart");
-            System.out.println("3. Play a media");
-            System.out.println("4. See current cart");
-            System.out.println("0. Back");
-            System.out.println("--------------------------------");
-            System.out.println("Please choose a number: 0-1-2-3-4");
+            storeMenu();
             int choice = getIntInput();
             switch (choice) {
-                case 1:
-                    showMediaDetails();
-                    break;
-                case 2:
-                    addMediaToCart();
-                    break;
-                case 3:
-                    playMediaInStore();
-                    break;
-                case 4:
-                    showCartMenu();
-                    break;
-                case 0:
-                    back = true;
-                    break;
-                default:
-                    System.out.println("Please enter a valid option.");
+                case 1: showMediaDetails(); break;
+                case 2: addMediaToCart(); break;
+                case 3: playMediaInStore(); break;
+                case 4: showCartMenu(); break;
+                case 0: back = true; break;
+                default: System.out.println("Please enter a valid option.");
             }
         }
     }
@@ -106,13 +115,7 @@ public class Aims {
     public static void showDetailsMenu(Media media) {
         boolean back = false;
         while (!back) {
-            System.out.println("Options:");
-            System.out.println("--------------------------------");
-            System.out.println("1. Add to cart");
-            System.out.println("2. Play");
-            System.out.println("0. Back");
-            System.out.println("--------------------------------");
-            System.out.println("Please choose a number: 0-1-2");
+            mediaDetailsMenu();
             int choice = getIntInput();
             switch (choice) {
                 case 1:
@@ -122,14 +125,11 @@ public class Aims {
                     if (media instanceof Playable) {
                         ((Playable) media).play();
                     } else {
-                        System.out.println("This media cannot be played.");
+                        System.out.println("This media type cannot be played.");
                     }
                     break;
-                case 0:
-                    back = true;
-                    break;
-                default:
-                    System.out.println("Please enter a valid option.");
+                case 0: back = true; break;
+                default: System.out.println("Please enter a valid option.");
             }
         }
     }
@@ -143,6 +143,7 @@ public class Aims {
             return;
         }
         cart.addMedia(media);
+        System.out.println("Number of items in cart: " + cart.getItemsOrdered().size());
     }
 
     public static void playMediaInStore() {
@@ -156,7 +157,7 @@ public class Aims {
         if (media instanceof Playable) {
             ((Playable) media).play();
         } else {
-            System.out.println("This media cannot be played.");
+            System.out.println("This media type cannot be played.");
         }
     }
 
@@ -164,38 +165,16 @@ public class Aims {
         boolean back = false;
         while (!back) {
             cart.print();
-            System.out.println("Options:");
-            System.out.println("--------------------------------");
-            System.out.println("1. Filter medias in cart");
-            System.out.println("2. Sort medias in cart");
-            System.out.println("3. Remove media from cart");
-            System.out.println("4. Play a media");
-            System.out.println("5. Place order");
-            System.out.println("0. Back");
-            System.out.println("--------------------------------");
-            System.out.println("Please choose a number: 0-1-2-3-4-5");
+            cartMenu();
             int choice = getIntInput();
             switch (choice) {
-                case 1:
-                    filterCart();
-                    break;
-                case 2:
-                    sortCart();
-                    break;
-                case 3:
-                    removeMediaFromCart();
-                    break;
-                case 4:
-                    playMediaInCart();
-                    break;
-                case 5:
-                    placeOrder();
-                    break;
-                case 0:
-                    back = true;
-                    break;
-                default:
-                    System.out.println("Please enter a valid option.");
+                case 1: filterCart(); break;
+                case 2: sortCart(); break;
+                case 3: removeMediaFromCart(); break;
+                case 4: playMediaInCart(); break;
+                case 5: placeOrder(); break;
+                case 0: back = true; break;
+                default: System.out.println("Please enter a valid option.");
             }
         }
     }
@@ -210,21 +189,15 @@ public class Aims {
                 System.out.print("Enter media id: ");
                 int id = getIntInput();
                 Media foundById = cart.searchById(id);
-                if (foundById != null) {
-                    System.out.println(foundById.toString());
-                } else {
-                    System.out.println("No media found with id " + id);
-                }
+                if (foundById != null) System.out.println(foundById.toString());
+                else System.out.println("No media found with id " + id);
                 break;
             case 2:
                 System.out.print("Enter media title: ");
                 String title = scanner.nextLine().trim();
                 Media foundByTitle = cart.searchByTitle(title);
-                if (foundByTitle != null) {
-                    System.out.println(foundByTitle.toString());
-                } else {
-                    System.out.println("No media found with title " + title);
-                }
+                if (foundByTitle != null) System.out.println(foundByTitle.toString());
+                else System.out.println("No media found with title: " + title);
                 break;
             default:
                 System.out.println("Please enter a valid option.");
@@ -237,14 +210,9 @@ public class Aims {
         System.out.println("2. Cost");
         int choice = getIntInput();
         switch (choice) {
-            case 1:
-                cart.sortByTitle();
-                break;
-            case 2:
-                cart.sortByCost();
-                break;
-            default:
-                System.out.println("Please enter a valid option.");
+            case 1: cart.sortByTitle(); break;
+            case 2: cart.sortByCost(); break;
+            default: System.out.println("Please enter a valid option.");
         }
     }
 
@@ -270,7 +238,7 @@ public class Aims {
         if (media instanceof Playable) {
             ((Playable) media).play();
         } else {
-            System.out.println("This media cannot be played.");
+            System.out.println("This media type cannot be played.");
         }
     }
 
@@ -295,47 +263,29 @@ public class Aims {
             System.out.println("Please choose a number: 0-1-2");
             int choice = getIntInput();
             switch (choice) {
-                case 1:
-                    addMediaToStore();
-                    break;
-                case 2:
-                    removeMediaFromStore();
-                    break;
-                case 0:
-                    back = true;
-                    break;
-                default:
-                    System.out.println("Please enter a valid option.");
+                case 1: addMediaToStore(); break;
+                case 2: removeMediaFromStore(); break;
+                case 0: back = true; break;
+                default: System.out.println("Please enter a valid option.");
             }
         }
     }
 
     public static void addMediaToStore() {
-        System.out.println("Add new media to store:");
         System.out.println("Select media type:");
         System.out.println("1. Digital Video Disc (DVD)");
         System.out.println("2. Compact Disc (CD)");
         System.out.println("3. Book");
         int type = getIntInput();
-        
         switch (type) {
-            case 1:
-                addDVDToStore();
-                break;
-            case 2:
-                addCDToStore();
-                break;
-            case 3:
-                addBookToStore();
-                break;
-            default:
-                System.out.println("Invalid media type.");
+            case 1: addDVDToStore(); break;
+            case 2: addCDToStore(); break;
+            case 3: addBookToStore(); break;
+            default: System.out.println("Invalid media type.");
         }
     }
 
     public static void addDVDToStore() {
-        System.out.print("Enter DVD id: ");
-        int id = getIntInput();
         System.out.print("Enter DVD title: ");
         String title = scanner.nextLine().trim();
         System.out.print("Enter DVD category: ");
@@ -346,14 +296,10 @@ public class Aims {
         int length = getIntInput();
         System.out.print("Enter DVD cost: ");
         float cost = getFloatInput();
-        
-        DigitalVideoDisc dvd = new DigitalVideoDisc(id, title, category, director, length, cost);
-        store.addMedia(dvd);
+        store.addMedia(new DigitalVideoDisc(title, category, director, length, cost));
     }
 
     public static void addCDToStore() {
-        System.out.print("Enter CD id: ");
-        int id = getIntInput();
         System.out.print("Enter CD title: ");
         String title = scanner.nextLine().trim();
         System.out.print("Enter CD category: ");
@@ -364,28 +310,24 @@ public class Aims {
         float cost = getFloatInput();
         System.out.print("Enter CD artist: ");
         String artist = scanner.nextLine().trim();
-        
-        CompactDisc cd = new CompactDisc(id, title, category, director, cost, artist);
-        store.addMedia(cd);
+        store.addMedia(new CompactDisc(title, category, director, cost, artist));
     }
 
     public static void addBookToStore() {
-        System.out.print("Enter Book id: ");
-        int id = getIntInput();
         System.out.print("Enter Book title: ");
         String title = scanner.nextLine().trim();
         System.out.print("Enter Book category: ");
         String category = scanner.nextLine().trim();
         System.out.print("Enter Book cost: ");
         float cost = getFloatInput();
-        
-        Book book = new Book(id, title, category, cost);
+        System.out.print("Enter content length (number of tokens): ");
+        int contentLength = getIntInput();
+        Book book = new Book(title, category, cost, contentLength);
         System.out.print("Enter number of authors: ");
         int numAuthors = getIntInput();
         for (int i = 0; i < numAuthors; i++) {
             System.out.print("Enter author " + (i + 1) + ": ");
-            String author = scanner.nextLine().trim();
-            book.addAuthor(author);
+            book.addAuthor(scanner.nextLine().trim());
         }
         store.addMedia(book);
     }
@@ -402,42 +344,38 @@ public class Aims {
     }
 
     private static int getIntInput() {
-        int value = -1;
         try {
-            String line = scanner.nextLine().trim();
-            value = Integer.parseInt(line);
+            return Integer.parseInt(scanner.nextLine().trim());
         } catch (NumberFormatException e) {
             System.out.println("Invalid number input.");
+            return -1;
         }
-        return value;
     }
 
     private static float getFloatInput() {
-        float value = -1;
         try {
-            String line = scanner.nextLine().trim();
-            value = Float.parseFloat(line);
+            return Float.parseFloat(scanner.nextLine().trim());
         } catch (NumberFormatException e) {
             System.out.println("Invalid number input.");
+            return -1;
         }
-        return value;
     }
 
     private static void initStore() {
-        Book book1 = new Book(1, "The War of Art", "Self-Help", 12.99f);
+        Book book1 = new Book("The War of Art", "Self-Help", 12.99f, 35000);
         book1.addAuthor("Steven Pressfield");
-        Book book2 = new Book(2, "Clean Code", "Software", 29.99f);
+        Book book2 = new Book("Clean Code", "Software", 29.99f, 90000);
         book2.addAuthor("Robert C. Martin");
 
-        DigitalVideoDisc dvd1 = new DigitalVideoDisc(3, "The Lion King", "Animation", "Roger Allers", 87, 19.95f);
-        DigitalVideoDisc dvd2 = new DigitalVideoDisc(4, "Star Wars", "Science Fiction", "George Lucas", 87, 24.95f);
+        DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.95f);
+        DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars", "Science Fiction", "George Lucas", 87, 24.95f);
 
-        CompactDisc cd1 = new CompactDisc(5, "Hybrid Theory", "Rock", "Don Gilmore", 15.00f, "Linkin Park");
+        CompactDisc cd1 = new CompactDisc("Hybrid Theory", "Rock", "Don Gilmore", 15.00f, "Linkin Park");
         cd1.addTrack(new Track("Papercut", 185));
         cd1.addTrack(new Track("One Step Closer", 156));
         cd1.addTrack(new Track("In the End", 216));
 
-        CompactDisc cd2 = new CompactDisc(6, "Thriller", "Pop", "Quincy Jones", 18.50f, "Michael Jackson");
+        CompactDisc cd2 = new CompactDisc("Thriller", "Pop", "Quincy Jones", 18.50f, "Michael Jackson");
         cd2.addTrack(new Track("Thriller", 357));
         cd2.addTrack(new Track("Beat It", 258));
 

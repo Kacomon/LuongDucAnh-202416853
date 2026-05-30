@@ -6,8 +6,8 @@ public class CompactDisc extends Disc implements Playable {
     private final String artist;
     private final ArrayList<Track> tracks = new ArrayList<>();
 
-    public CompactDisc(int id, String title, String category, String director, float cost, String artist) {
-        super(id, title, category, cost, director, 0);
+    public CompactDisc(String title, String category, String director, float cost, String artist) {
+        super(title, category, cost, director, 0);
         this.artist = artist;
     }
 
@@ -44,6 +44,7 @@ public class CompactDisc extends Disc implements Playable {
         }
     }
 
+    @Override
     public int getLength() {
         return tracks.stream().mapToInt(Track::getLength).sum();
     }
@@ -63,14 +64,16 @@ public class CompactDisc extends Disc implements Playable {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("CD - [").append(getTitle()).append("] - [").append(getCategory()).append("] - [").append(getArtist()).append("] - [").append(getDirector()).append("] - [").append(getLength()).append("] : [").append(getCost()).append("] $");
+        StringBuilder sb = new StringBuilder();
+        sb.append("CD - [").append(getTitle()).append("] - [").append(getCategory())
+          .append("] - [").append(artist).append("] - [").append(getDirector())
+          .append("] - [").append(getLength()).append("] : [").append(getCost()).append("] $");
         if (!tracks.isEmpty()) {
-            builder.append("\nTracks:");
-            for (Track track : tracks) {
-                builder.append("\n  ").append(track.toString());
+            sb.append("\nTracks:");
+            for (Track t : tracks) {
+                sb.append("\n  ").append(t.toString());
             }
         }
-        return builder.toString();
+        return sb.toString();
     }
 }
