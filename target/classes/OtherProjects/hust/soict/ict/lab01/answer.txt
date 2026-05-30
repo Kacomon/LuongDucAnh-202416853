@@ -1,0 +1,2 @@
+1. If choose Cancel the userChoice = 2 and the option will not equal to JOptionPane.YES_OPTION  then the program will display "You've chosen: No" message.
+2. To change to only Option Yes/No we will declare a String array {I do, I dont} then put it in as parameter in the function.

@@ -1,8 +1,8 @@
 package AimsProject.hust.soict.ict.aims.media;
 
 public class Track implements Playable {
-    private final String title;
-    private final int length;
+    private String title;
+    private int length;
 
     public Track(String title, int length) {
         this.title = title;
@@ -18,39 +18,20 @@ public class Track implements Playable {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof Track)) {
-            return false;
-        }
-        Track other = (Track) obj;
-        if (title == null) {
-            return other.title == null && length == other.length;
-        }
-        return title.equalsIgnoreCase(other.title) && length == other.length;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = title == null ? 0 : title.toLowerCase().hashCode();
-        result = 31 * result + Integer.hashCode(length);
-        return result;
-    }
-
-    @Override
     public void play() {
-        if (length <= 0) {
-            System.out.println("Cannot play track: " + title);
-            return;
+        if (length > 0) {
+            System.out.println("Playing Track: " + this.title);
+            System.out.println("Track length: " + this.length);
+        } else {
+            System.out.println("Cannot play Track: Length is 0 or invalid.");
         }
-        System.out.println("Playing track: " + title);
-        System.out.println("Track length: " + length);
     }
 
     @Override
-    public String toString() {
-        return "Track: [" + title + "] - [" + length + "]";
+    public boolean equals(Object o) {
+        if (o == this) return true;
+        if (!(o instanceof Track)) return false;
+        Track other = (Track) o;
+        return this.title.equals(other.title) && this.length == other.length;
     }
 }

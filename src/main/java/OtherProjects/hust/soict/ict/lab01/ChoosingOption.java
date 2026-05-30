@@ -21,9 +21,8 @@ public class ChoosingOption {
         } else if (userChoice == 1) {
             JOptionPane.showMessageDialog(null, "You choose No");
         } else {
-            JOptionPane.showMessageDialog(null, "You closed the pane");
+            JOptionPane.showMessageDialog(null, "U closed the pane");
         }
-
         System.exit(0);
     }
 }

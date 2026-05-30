@@ -119,9 +119,8 @@ public class NumberOfDays {
                 return 30;
             case 2:
                 return isLeapYear(year) ? 29 : 28;
-            default:
-                return -1;
         }
+        return -1;
     }
 
     private static boolean isLeapYear(int year) {

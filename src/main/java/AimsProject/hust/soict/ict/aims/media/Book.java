@@ -1,52 +1,48 @@
 package AimsProject.hust.soict.ict.aims.media;
-
 import java.util.ArrayList;
+import java.util.List;
 
 public class Book extends Media {
-    private final ArrayList<String> authors = new ArrayList<>();
+    private List<String> authors = new ArrayList<String>();
+    private int contentLength;
 
-    public Book(int id, String title, String category, float cost) {
-        super(id, title, category, cost);
+    public Book(String title, String category, String contentLength,double cost) {
+        super(title, category, cost);
+
     }
 
-    public ArrayList<String> getAuthors() {
-        return authors;
+    public Book(String title, String category,double cost,String... names){
+        super(title,category,cost);
+        for(String name : names){
+            this.addAuthor(name);
+        }
     }
 
     public void addAuthor(String authorName) {
-        if (authorName == null || authorName.isEmpty()) {
-            System.out.println("Cannot add empty author name.");
-            return;
-        }
-        if (authors.contains(authorName)) {
+        if (!authors.contains(authorName)) {
+            authors.add(authorName);
+        } else {
             System.out.println("Author already exists: " + authorName);
-            return;
         }
-        authors.add(authorName);
-        System.out.println("Author added: " + authorName);
     }
 
     public void removeAuthor(String authorName) {
-        if (authorName == null || authorName.isEmpty()) {
-            System.out.println("Cannot remove empty author name.");
-            return;
-        }
-        if (authors.remove(authorName)) {
-            System.out.println("Author removed: " + authorName);
+        if (authors.contains(authorName)) {
+            authors.remove(authorName);
         } else {
             System.out.println("Author not found: " + authorName);
         }
     }
 
-    public int getLength() {
-        if (getTitle() == null || getTitle().trim().isEmpty()) {
-            return 0;
-        }
-        return getTitle().trim().split("\\s+").length;
-    }
-
     @Override
     public String toString() {
-        return "Book - [" + getTitle() + "] - [" + getCategory() + "] - authors=" + authors + " - content length=" + getLength() + " - [" + getCost() + "] $";
+        String info = "Book - " + getTitle() + " - " + getCategory() + " - " + getCost() + "$ - ";
+
+        if (authors.isEmpty()) {
+            return info + "Unknown Author";
+        }
+
+        // Joins the list elements with ", "
+        return info + String.join(", ", authors);
     }
 }

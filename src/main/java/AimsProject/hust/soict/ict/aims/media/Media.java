@@ -1,27 +1,34 @@
 package AimsProject.hust.soict.ict.aims.media;
-
 import java.util.Comparator;
-import java.util.Objects;
 
 public abstract class Media {
+    private static int nbMedia=0;
     private int id;
     private String title;
     private String category;
-    private float cost;
+    private double cost;
 
-    public static final Comparator<Media> COMPARE_BY_TITLE_COST = Comparator
-            .comparing(Media::getTitle, String.CASE_INSENSITIVE_ORDER)
-            .thenComparing(Comparator.comparing(Media::getCost).reversed());
+    public static final Comparator<Media> COMPARE_BY_TITLE_COST =
+            new MediaComparator(MediaComparator.BY_TITLE_COST);
 
-    public static final Comparator<Media> COMPARE_BY_COST_TITLE = Comparator
-            .comparing(Media::getCost).reversed()
-            .thenComparing(Media::getTitle, String.CASE_INSENSITIVE_ORDER);
+    public static final Comparator<Media> COMPARE_BY_COST_TITLE =
+            new MediaComparator(MediaComparator.BY_COST_TITLE);
 
     public Media() {
+        nbMedia++;
+        this.id=nbMedia;
     }
 
-    public Media(int id, String title, String category, float cost) {
-        this.id = id;
+    public Media(String title){
+        nbMedia++;
+        this.id=nbMedia;
+        this.title = title;
+    }
+
+
+    public Media(String title, String category, double cost) {
+        nbMedia++;
+        this.id = nbMedia;
         this.title = title;
         this.category = category;
         this.cost = cost;
@@ -29,6 +36,10 @@ public abstract class Media {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -47,7 +58,7 @@ public abstract class Media {
         this.category = category;
     }
 
-    public float getCost() {
+    public double getCost() {
         return cost;
     }
 
@@ -56,27 +67,14 @@ public abstract class Media {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof Media)) {
-            return false;
-        }
-        Media other = (Media) obj;
-        if (title == null) {
-            return other.title == null;
-        }
-        return title.equalsIgnoreCase(other.title);
-    }
-
-    @Override
-    public int hashCode() {
-        return title == null ? 0 : title.toLowerCase().hashCode();
+    public boolean equals(Object o) {
+        if (o == this) return true;
+        if (!(o instanceof Media)) return false;
+        return ((Media) o).getTitle().equals(this.title);
     }
 
     @Override
     public String toString() {
-        return "Media [id=" + id + ", title=" + title + ", category=" + category + ", cost=" + cost + "]";
+        return "Media - " + title + " - " + category + " - " + cost + "$";
     }
 }

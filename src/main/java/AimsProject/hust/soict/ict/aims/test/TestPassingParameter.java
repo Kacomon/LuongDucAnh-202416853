@@ -1,6 +1,6 @@
 package AimsProject.hust.soict.ict.aims.test;
 
-import AimsProject.hust.soict.ict.aims.disc.DigitalVideoDisc;
+import AimsProject.hust.soict.ict.aims.media.DigitalVideoDisc;
 
 public class TestPassingParameter {
 
@@ -21,8 +21,6 @@ public class TestPassingParameter {
         System.out.println("jungle dvd title: " + jungleDVD.getTitle());
 
 
-        changeTitle(jungleDVD, cinderellaDVD.getTitle());
-        System.out.println("jungle dvd title: " + jungleDVD.getTitle());
     }
 
     public static void swap(Object o1, Object o2) {
