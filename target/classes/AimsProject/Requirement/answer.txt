@@ -1,0 +1,24 @@
+Which classes are aggregates of other classes? Checking all constructors of whole classes if they initialize for their parts?
+Ans: CompactDisc is an aggregate of Track (since one CD contains multiple tracks, and tracks can exist independently). Book is an aggregate of String authors (one Book has multiple authors). Cart is an aggregate of Media. Store is an aggregate of Media. In the constructors: CompactDisc's constructor initializes its tracks list via addAll(tracks), Book's constructor initializes its authors list via addAll(authors), Cart and Store don't take parts in constructor — parts are added later via addMedia(). All aggregates properly initialize their internal collections.
+
+Write constructors for parent and child classes. Remove redundant setter methods if any.
+Ans: Media's constructor takes (title, category, cost) and auto-increments id. Disc's constructor takes (title, category, cost, length, director) and calls super(title, category, cost). Book's constructor takes (title, category, cost, authors) and calls super(title, category, cost). DigitalVideoDisc's constructor takes (title, category, cost, length, director) and calls super(title, category, cost, length, director). CompactDisc's constructor takes (title, category, cost, length, director, artist, tracks) and calls super(title, category, cost, length, director). Track's constructor takes (title, length). Redundant setters: setTitle(), setCategory(), setCost() in Media are kept for flexibility (e.g. updating price), so not removed. The hierarchy uses super() correctly to avoid code duplication in constructors.
+
+When overriding the equals() method of the Object class, you will have to cast the Object parameter obj to the type of Object that you are dealing with. If the passing object is not an instance of Media, what happens?
+Ans: If the object is not an instance of Media, instanceof check returns false and equals() immediately returns false. No cast is attempted, so no ClassCastException is thrown. This is the correct and safe approach: check with instanceof before casting.
+
+Create an ArrayList of Media, then add some media (CD, DVD or Book) into the list. Iterate through the list and print out the information of the media by using toString() method. Observe what happens and explain in detail.
+Ans: When iterating a List<Media> and calling toString() on each element, dynamic dispatch (polymorphism) ensures that each object's own toString() is called — Book prints "Book - title - category : cost $", DVD prints "DVD - title - category - director - length : cost $", CD prints "CompactDisc - title - category : cost $". Even though the reference type is Media, the JVM resolves the method at runtime based on the actual object type. This demonstrates runtime polymorphism: a single interface (toString()) behaves differently depending on the concrete subclass.
+
+Suppose we are taking this Comparable interface approach.
+- What class should implement the Comparable interface?
+Ans: The abstract Media class should implement Comparable<Media>, since all media types (Book, DVD, CD) are stored in a List<Media> and sorted together.
+
+- In those classes, how should you implement the compareTo() method be to reflect the ordering that we want?
+Ans: compareTo() should compare by title first (using String.compareTo()), then by cost (using Double.compare()), so items are naturally ordered by title, with cost as a tiebreaker.
+
+- Can we have two ordering rules of the item (by title then cost and by cost then title) if we use this Comparable interface approach?
+Ans: No. Comparable allows only one natural ordering via a single compareTo() method. For multiple ordering rules, use separate Comparator implementations instead.
+
+- Suppose the DVDs has a different ordering rule from the other media types, that is by title, then decreasing length, then cost. How would you modify your code to allow this?
+Ans: Overriding compareTo() in DigitalVideoDisc is not reliable because it would be called polymorphically on a List<Media>, causing inconsistency when comparing DVD against Book/CD. Instead, create a custom Comparator (e.g., DvdComparatorByTitleLengthCost) that checks instanceof and applies the DVD-specific rule, then pass it to Collections.sort() when needed.
