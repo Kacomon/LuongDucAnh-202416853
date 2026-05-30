@@ -1,34 +1,33 @@
 package OtherProjects.hust.soict.ict.garbage;
 
-import java.util.Random;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
+/**
+ * Demonstrates the "garbage" problem when using + to build strings in a loop.
+ * Each += creates a new String object, flooding the heap and triggering GC.
+ */
 public class GarbageCreator {
     public static void main(String[] args) {
-        Random r = new Random(123);
+        String filename = "test.exe";
+        byte[] inputBytes;
 
-        long start = System.currentTimeMillis();
-        String s = "";
-        for (int i = 0; i < 65536; i++) {
-            s += r.nextInt(2);
+        try {
+            inputBytes = Files.readAllBytes(Paths.get(filename));
+        } catch (IOException e) {
+            // Fallback: simulate with a large byte array if file not found
+            System.err.println("File not found, using simulated data.");
+            inputBytes = new byte[100000];
         }
-        System.out.println("String (+) time: " + (System.currentTimeMillis() - start) + " ms");
 
-        r = new Random(123);
-        start = System.currentTimeMillis();
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < 65536; i++) {
-            sb.append(r.nextInt(2));
+        // BAD: using + creates a new String object on every iteration — lots of garbage
+        long startTime = System.currentTimeMillis();
+        String outputString = "";
+        for (byte b : inputBytes) {
+            outputString += (char) b;  // GARBAGE: old string discarded each iteration
         }
-        s = sb.toString();
-        System.out.println("StringBuilder time: " + (System.currentTimeMillis() - start) + " ms");
-
-        r = new Random(123);
-        start = System.currentTimeMillis();
-        StringBuffer sBuffer = new StringBuffer();
-        for (int i = 0; i < 65536; i++) {
-            sBuffer.append(r.nextInt(2));
-        }
-        s = sBuffer.toString();
-        System.out.println("StringBuffer time: " + (System.currentTimeMillis() - start) + " ms");
+        long endTime = System.currentTimeMillis();
+        System.out.println("GarbageCreator (+ operator) time: " + (endTime - startTime) + " ms");
     }
 }

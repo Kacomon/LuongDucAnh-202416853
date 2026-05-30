@@ -5,7 +5,7 @@ import AimsProject.hust.soict.ict.aims.disc.DigitalVideoDisc;
 public class Store {
     public static final int MAX_ITEMS_IN_STORE = 100;
 
-    private DigitalVideoDisc itemsInStore[] = new DigitalVideoDisc[MAX_ITEMS_IN_STORE];
+    private DigitalVideoDisc[] itemsInStore = new DigitalVideoDisc[MAX_ITEMS_IN_STORE];
     private int qtyInStore = 0;
 
     public void addDVD(DigitalVideoDisc dvd) {
@@ -14,7 +14,7 @@ public class Store {
             qtyInStore++;
             System.out.println("SUCCESS: " + dvd.getTitle() + " has been added to the store's inventory.");
         } else {
-            System.out.println("ERROR: The store's inventory is full. Cannot add more items.");
+            System.out.println("ERROR: The store's inventory is full.");
         }
     }
 
@@ -35,5 +35,17 @@ public class Store {
         if (!found) {
             System.out.println("ERROR: " + dvd.getTitle() + " was not found in the store's inventory.");
         }
+    }
+
+    public void print() {
+        System.out.println("***********************STORE***********************");
+        if (qtyInStore == 0) {
+            System.out.println("The store is empty.");
+        } else {
+            for (int i = 0; i < qtyInStore; i++) {
+                System.out.println((i + 1) + ". " + itemsInStore[i].toString());
+            }
+        }
+        System.out.println("***************************************************");
     }
 }
